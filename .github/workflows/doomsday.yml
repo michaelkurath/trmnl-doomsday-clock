@@ -1,0 +1,32 @@
+name: Update Doomsday Clock JSON
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 6 * * *" # daily 06:15 UTC (adjust later)
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate JSON
+        run: node scripts/doomsday.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add doomsday.json
+          git diff --cached --quiet || git commit -m "Update doomsday.json"
+          git push
