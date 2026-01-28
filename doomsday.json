@@ -1,0 +1,168 @@
+{
+  "source": "https://en.wikipedia.org/wiki/Doomsday_Clock",
+  "updated_at": "2026-01-28T12:33:35.608Z",
+  "current": {
+    "year": 2026,
+    "seconds_to_midnight": 85
+  },
+  "modern": [
+    {
+      "year": 2002,
+      "seconds": 420
+    },
+    {
+      "year": 2007,
+      "seconds": 300
+    },
+    {
+      "year": 2010,
+      "seconds": 360
+    },
+    {
+      "year": 2012,
+      "seconds": 300
+    },
+    {
+      "year": 2015,
+      "seconds": 180
+    },
+    {
+      "year": 2017,
+      "seconds": 4800
+    },
+    {
+      "year": 2018,
+      "seconds": 120
+    },
+    {
+      "year": 2020,
+      "seconds": 100
+    },
+    {
+      "year": 2023,
+      "seconds": 90
+    },
+    {
+      "year": 2025,
+      "seconds": 89
+    },
+    {
+      "year": 2026,
+      "seconds": 85
+    }
+  ],
+  "timeline": [
+    {
+      "year": 1947,
+      "seconds": 420
+    },
+    {
+      "year": 1949,
+      "seconds": 180
+    },
+    {
+      "year": 1953,
+      "seconds": 120
+    },
+    {
+      "year": 1960,
+      "seconds": 420
+    },
+    {
+      "year": 1963,
+      "seconds": 720
+    },
+    {
+      "year": 1968,
+      "seconds": 420
+    },
+    {
+      "year": 1969,
+      "seconds": 600
+    },
+    {
+      "year": 1972,
+      "seconds": 720
+    },
+    {
+      "year": 1974,
+      "seconds": 540
+    },
+    {
+      "year": 1980,
+      "seconds": 420
+    },
+    {
+      "year": 1981,
+      "seconds": 240
+    },
+    {
+      "year": 1984,
+      "seconds": 180
+    },
+    {
+      "year": 1988,
+      "seconds": 360
+    },
+    {
+      "year": 1990,
+      "seconds": 600
+    },
+    {
+      "year": 1991,
+      "seconds": 1020
+    },
+    {
+      "year": 1995,
+      "seconds": 840
+    },
+    {
+      "year": 1998,
+      "seconds": 540
+    },
+    {
+      "year": 2002,
+      "seconds": 420
+    },
+    {
+      "year": 2007,
+      "seconds": 300
+    },
+    {
+      "year": 2010,
+      "seconds": 360
+    },
+    {
+      "year": 2012,
+      "seconds": 300
+    },
+    {
+      "year": 2015,
+      "seconds": 180
+    },
+    {
+      "year": 2017,
+      "seconds": 4800
+    },
+    {
+      "year": 2018,
+      "seconds": 120
+    },
+    {
+      "year": 2020,
+      "seconds": 100
+    },
+    {
+      "year": 2023,
+      "seconds": 90
+    },
+    {
+      "year": 2025,
+      "seconds": 89
+    },
+    {
+      "year": 2026,
+      "seconds": 85
+    }
+  ]
+}
