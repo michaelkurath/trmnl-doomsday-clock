@@ -1,0 +1,14 @@
+{%- comment -%}
+Data expected:
+current.seconds_to_midnight (number)
+current.year (number/string)
+{%- endcomment -%}
+
+{%- assign s2 = current.seconds_to_midnight -%}
+{%- assign total = 86400 | minus: s2 -%}
+{%- assign hh = total | divided_by: 3600 -%}
+{%- assign mm = total | modulo: 3600 | divided_by: 60 -%}
+{%- assign ss = total | modulo: 60 -%}
+{%- assign hh2 = hh | prepend: "00" | slice: -2, 2 -%}
+{%- assign mm2 = mm | prepend: "00" | slice: -2, 2 -%}
+{%- assign ss2 = ss | prepend: "00" | slice: -2, 2 -%}
