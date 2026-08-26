@@ -35,9 +35,9 @@ custom_fields:
   field_type: author_bio
   name: About This Plugin
   category: life,morbid
-  description: The Doomsday Clock is a symbol that represents the estimated likelihood of a human-made global catastrophe.
+  description: An unofficial open-source TRMNL display for the Doomsday Clock. Source data is attributed in the GitHub repository.
   email_address: michael.kurath@gmail.com
-  learn_more_url: https://en.wikipedia.org/wiki/Doomsday_Clock
+  learn_more_url: https://github.com/michaelkurath/trmnl-doomsday-clock
 name: Doomsday Clock
-description:
+description: Current Doomsday Clock setting with analog, digital, and recent-history views.
 refresh_interval: 1440
