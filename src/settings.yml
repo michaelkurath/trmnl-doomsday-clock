@@ -35,7 +35,7 @@ custom_fields:
   field_type: author_bio
   name: About This Plugin
   category: life,morbid
-  description: An unofficial open-source TRMNL display for the Doomsday Clock. Source data is attributed in the GitHub repository.
+  description: An unofficial open-source TRMNL display for the Doomsday Clock. Licensed under CC BY 4.0; source attribution is available in the GitHub repository.
   email_address: michael.kurath@gmail.com
   learn_more_url: https://github.com/michaelkurath/trmnl-doomsday-clock
 name: Doomsday Clock
