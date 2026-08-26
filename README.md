@@ -10,7 +10,7 @@ The display combines a custom analog clock face, the exact number of seconds rem
 - Four responsive TRMNL layouts
 - Automatically refreshed Doomsday Clock data
 - No external chart or JavaScript dependency in the rendered recipe
-- MIT-licensed source code
+- Licensed for sharing and adaptation under CC BY 4.0
 
 ## How it works
 
@@ -47,8 +47,10 @@ For recipe changes, edit the Liquid templates in `src/` and preview each layout 
 
 Bug reports and focused improvements are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a pull request.
 
-## License
+## License and attribution
 
-The software and templates in this repository are available under the [MIT License](./LICENSE).
+The original visual design, data parsing logic, markup, and other original content in this repository are licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](./LICENSE).
 
-The license applies only to this project's original code and templates. Third-party names, trademarks, source material, and data remain the property of their respective owners.
+When sharing or adapting the recipe, credit Michael Kurath, link to this repository and the CC BY 4.0 license, and indicate whether changes were made.
+
+The license applies only to this project's original content. Third-party names, trademarks, source material, and data remain the property of their respective owners.
