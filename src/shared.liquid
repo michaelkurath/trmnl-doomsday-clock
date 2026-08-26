@@ -1,14 +1,106 @@
 {%- comment -%}
-Data expected:
-current.seconds_to_midnight (number)
-current.year (number/string)
+Shared presentation and calculations for every TRMNL layout.
+Expected data: current.seconds_to_midnight, current.year, modern[].
 {%- endcomment -%}
 
-{%- assign s2 = current.seconds_to_midnight -%}
-{%- assign total = 86400 | minus: s2 -%}
-{%- assign hh = total | divided_by: 3600 -%}
-{%- assign mm = total | modulo: 3600 | divided_by: 60 -%}
-{%- assign ss = total | modulo: 60 -%}
+{%- assign seconds_left = current.seconds_to_midnight | plus: 0 -%}
+{%- if seconds_left > 3600 -%}{%- assign seconds_left = 3600 -%}{%- endif -%}
+{%- if seconds_left < 0 -%}{%- assign seconds_left = 0 -%}{%- endif -%}
+{%- assign elapsed = 3600 | minus: seconds_left -%}
+{%- assign hand_angle = elapsed | times: 360.0 | divided_by: 3600.0 -%}
+
+{%- assign day_seconds = 86400 | minus: seconds_left -%}
+{%- assign hh = day_seconds | divided_by: 3600 -%}
+{%- assign mm = day_seconds | modulo: 3600 | divided_by: 60 -%}
+{%- assign ss = day_seconds | modulo: 60 -%}
 {%- assign hh2 = hh | prepend: "00" | slice: -2, 2 -%}
 {%- assign mm2 = mm | prepend: "00" | slice: -2, 2 -%}
 {%- assign ss2 = ss | prepend: "00" | slice: -2, 2 -%}
+
+{%- capture clock_svg -%}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-82 -82 164 164">
+  <circle cx="0" cy="0" r="79" fill="#000"/>
+  <circle cx="0" cy="0" r="73" fill="none" stroke="#fff" stroke-width="1.5"/>
+  {% for i in (0..59) %}
+    {% assign tick_angle = i | times: 6 %}
+    {% assign tick_mod = i | modulo: 5 %}
+    <g transform="rotate({{ tick_angle }})">
+      {% if tick_mod == 0 %}
+        <line x1="0" y1="-68" x2="0" y2="-57" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+      {% else %}
+        <line x1="0" y1="-68" x2="0" y2="-64" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+      {% endif %}
+    </g>
+  {% endfor %}
+  <circle cx="0" cy="0" r="7" fill="#fff"/>
+  <g transform="rotate({{ hand_angle }})">
+    <line x1="0" y1="13" x2="0" y2="-57" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="3" fill="#000"/>
+  </g>
+</svg>
+{%- endcapture -%}
+
+{%- capture title_icon -%}
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+  <circle cx="12" cy="12" r="9.5" fill="none" stroke="#000" stroke-width="2"/>
+  <path d="M12 12V5M12 12l4-2" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="12" cy="12" r="2" fill="#000"/>
+</svg>
+{%- endcapture -%}
+
+<style>
+  .ds-layout { box-sizing: border-box; height: 100%; width: 100%; color: #000; }
+  .ds-layout * { box-sizing: border-box; }
+  .ds-kicker { font-size: 13px; font-weight: 700; letter-spacing: 0.18em; line-height: 1; text-transform: uppercase; }
+  .ds-rule { height: 2px; width: 100%; background: #000; }
+  .ds-clock-card { align-items: center; background: #000; border-radius: 18px; display: flex; justify-content: center; overflow: hidden; }
+  .ds-clock { display: block; height: auto; width: 100%; }
+  .ds-number { font-weight: 800; letter-spacing: -0.075em; line-height: 0.78; }
+  .ds-unit { font-weight: 700; letter-spacing: 0.1em; line-height: 1.05; text-transform: uppercase; }
+  .ds-time { border-bottom: 2px solid #000; border-top: 2px solid #000; display: flex; justify-content: space-between; padding: 9px 0 8px; }
+  .ds-time-label { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .ds-time-value { font-size: 22px; font-weight: 700; letter-spacing: 0.04em; }
+  .ds-history { align-items: flex-end; display: flex; gap: 9px; height: 76px; }
+  .ds-history-item { align-items: center; display: flex; flex: 1; flex-direction: column; height: 100%; justify-content: end; min-width: 0; }
+  .ds-bar { background: #000; border-radius: 3px 3px 0 0; width: 100%; }
+  .ds-year { font-size: 10px; font-weight: 700; line-height: 1; margin-top: 5px; }
+  .ds-source { font-size: 11px; line-height: 1.15; }
+  .ds-title-icon { display: inline-flex; height: 24px; width: 24px; }
+
+  .ds-full { display: flex; flex-direction: column; gap: 12px; }
+  .ds-full__head { align-items: center; display: flex; gap: 14px; }
+  .ds-full__head .ds-rule { flex: 1; }
+  .ds-full__body { display: grid; flex: 1; gap: 22px; grid-template-columns: minmax(0, 43fr) minmax(0, 57fr); min-height: 0; }
+  .ds-full .ds-clock-card { padding: 18px; }
+  .ds-full .ds-clock { max-width: 280px; }
+  .ds-full__readout { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; padding: 8px 0 2px; }
+  .ds-full__hero { align-items: flex-end; display: flex; gap: 18px; }
+  .ds-full .ds-number { font-size: 142px; }
+  .ds-full .ds-unit { font-size: 21px; padding-bottom: 6px; }
+  .ds-history-head { align-items: baseline; display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .ds-history-title { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .ds-half-h { align-items: stretch; display: grid; gap: 18px; grid-template-columns: minmax(0, 38fr) minmax(0, 62fr); }
+  .ds-half-h .ds-clock-card { padding: 12px; }
+  .ds-half-h .ds-clock { max-width: 168px; }
+  .ds-half-h__readout { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; padding: 4px 0; }
+  .ds-half-h__hero { align-items: flex-end; display: flex; gap: 14px; }
+  .ds-half-h .ds-number { font-size: 92px; }
+  .ds-half-h .ds-unit { font-size: 16px; padding-bottom: 5px; }
+
+  .ds-half-v { display: flex; flex-direction: column; gap: 14px; }
+  .ds-half-v .ds-clock-card { flex: 1; min-height: 0; padding: 16px; }
+  .ds-half-v .ds-clock { max-width: 210px; }
+  .ds-half-v__hero { align-items: flex-end; display: flex; gap: 13px; justify-content: center; }
+  .ds-half-v .ds-number { font-size: 96px; }
+  .ds-half-v .ds-unit { font-size: 15px; padding-bottom: 4px; }
+
+  .ds-quadrant { align-items: center; display: grid; gap: 13px; grid-template-columns: minmax(0, 43fr) minmax(0, 57fr); }
+  .ds-quadrant .ds-clock-card { border-radius: 13px; height: 100%; padding: 10px; }
+  .ds-quadrant .ds-clock { max-width: 140px; }
+  .ds-quadrant__readout { min-width: 0; }
+  .ds-quadrant .ds-number { font-size: 70px; }
+  .ds-quadrant .ds-unit { font-size: 12px; margin-top: 8px; }
+  .ds-quadrant .ds-time { margin-top: 14px; padding: 6px 0; }
+  .ds-quadrant .ds-time-value { font-size: 16px; }
+</style>
